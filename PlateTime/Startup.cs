@@ -38,15 +38,15 @@ namespace PlateTimeApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-
             //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlite("Data Source=.\\wwwroot\\platetime.db"));
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection")));
 
-            //services.AddDbContext<PlateTimeContext>(options =>
-            //    options.UseSqlite("Data Source=.\\wwwroot\\platetime.db"));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite("Data Source=.\\wwwroot\\platetime.db"));
+
+            services.AddDbContext<PlateTimeContext>(options =>
+                options.UseSqlite("Data Source=.\\wwwroot\\platetime.db"));
 
             services.AddDbContext<NewsFeedContext>(options =>
                 options.UseSqlite("Data Source=.\\wwwroot\\sql.db"));
@@ -72,11 +72,11 @@ namespace PlateTimeApp
                     });
             });
 
-            services.AddRecaptcha(new RecaptchaOptions
-            {
-                SiteKey = Configuration["Recaptcha:SiteKey"],
-                SecretKey = Configuration["Recaptcha:SecretKey"]
-            });
+            //services.AddRecaptcha(new RecaptchaOptions
+            //{
+            //    SiteKey = Configuration["Recaptcha:SiteKey"],
+            //    SecretKey = Configuration["Recaptcha:SecretKey"]
+            //});
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)

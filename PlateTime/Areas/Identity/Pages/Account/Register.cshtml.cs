@@ -91,13 +91,13 @@ namespace PlateTimeApp.Areas.Identity.Pages.Account
             public string Usertype { get; set; }
         }
 
-        public void OnGet(string returnUrl = null)
-        {
-            ViewData["SiteKey"] = _configuration["Recaptcha:SiteKey"];
-            ReturnUrl = returnUrl;
-        }
+        //public void OnGet(string returnUrl = null)
+        //{
+        //    ViewData["SiteKey"] = _configuration["Recaptcha:SiteKey"];
+        //    ReturnUrl = returnUrl;
+        //}
 
-        [ValidateRecaptcha]
+        //[ValidateRecaptcha]
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -162,7 +162,7 @@ namespace PlateTimeApp.Areas.Identity.Pages.Account
                 }
             }
             // Reset the site key if there is an error.
-            ViewData["SiteKey"] = _configuration["Recaptcha:SiteKey"];
+           // ViewData["SiteKey"] = _configuration["Recaptcha:SiteKey"];
 
             // If we got this far, something failed, redisplay form
             return Page();

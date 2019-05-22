@@ -34,7 +34,7 @@
             @Html.RadioButtonFor(m => m.Input.Usertype, "Manager")
             <label for="Manager">Restraunt</label>
 
-            <div id="ReCaptchContainer"></div>
+            @*<div id="ReCaptchContainer"></div>*@
             <br /><label id="lblMessage"></label><br />
 
 
@@ -48,12 +48,12 @@
 }
 
 <!--Load reCaptcha API-->
-<script src="https://www.google.com/recaptcha/api.js?onload=renderRecaptcha&render=explicit"
+@*<script src="https://www.google.com/recaptcha/api.js?onload=renderRecaptcha&render=explicit"
         async defer>
-</script>
+</script>*@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
     // Style and draw reCAPTCHA.
     var renderRecaptcha = function () {
         grecaptcha.render('ReCaptchContainer', {
@@ -92,4 +92,4 @@
         $(':input[type="submit"]').prop('disabled', true);
     });
 
-</script>
+</script>*@

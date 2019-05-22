@@ -26,7 +26,7 @@ namespace PlateTimeApp.Controllers
             repo = new UserProfileVMRepo(db);
         }
 
-        
+
         public async Task<IActionResult> Index()
         {
             string userName = HttpContext.User.Identity.Name;
@@ -86,8 +86,8 @@ namespace PlateTimeApp.Controllers
             int restaurantGoerId = db.RestaurantGoer
                                      .Where(r => r.UserId == ids)
                                      .Select(r => r.Id).FirstOrDefault();
-           
-            if(restaurantGoerId != 0)
+
+            if (restaurantGoerId != 0)
             {
                 profile = repo.GetProfile(ids);
 
@@ -100,7 +100,7 @@ namespace PlateTimeApp.Controllers
                     priceCategory = Convert.ToInt32(items.PriceCategory);
                     resid = items.Id;
                 }
-               
+
                 var restaurantId = db.RestaurantGoerRestaurant
                                      .Where(rgr => rgr.RestaurantGoerId == resid)
                                      .Select(rgr => rgr.RestaurantId).FirstOrDefault();
@@ -121,7 +121,7 @@ namespace PlateTimeApp.Controllers
                 ViewData["PriceCategory"] = priceCategory.ToString();
                 ViewData["id"] = resid;
                 ViewData["RestaurantName"] = restaurantName;
-                ViewData["foodCategory"]  = foodcategoryName;
+                ViewData["foodCategory"] = foodcategoryName;
                 ViewBag.count = 1;
 
                 IList<Restaurant> restaurantList = new List<Restaurant>();
@@ -150,7 +150,7 @@ namespace PlateTimeApp.Controllers
 
                 var prices = new SelectListItem[10];
 
-              
+
                 int j = 0;
                 for (int i = 10; i <= 100; i = i + 10)
                 {
@@ -168,6 +168,7 @@ namespace PlateTimeApp.Controllers
             }
             else
             {
+                profile.PriceCategoryList = new PriceCategoryDropdownBuilder().priceCategories;
                 var allCategories = db.FoodCategory.ToList();
                 var checkBoxListItems = new List<CheckBoxListItem>();
                 foreach (var category in allCategories)
@@ -206,7 +207,7 @@ namespace PlateTimeApp.Controllers
 
                 var prices = new SelectListItem[10];
 
-      
+
                 int j = 0;
                 for (int i = 10; i <= 100; i = i + 10)
                 {
@@ -235,7 +236,7 @@ namespace PlateTimeApp.Controllers
                           .Where(x => x.Email == userName)
                           .FirstOrDefault().Id;
             UserProfileVMRepo upvmRepo = new UserProfileVMRepo(db);
-            upvmRepo.Update(ids,upVM);
+            upvmRepo.Update(ids, upVM);
             return RedirectToAction("Index");
         }
     }
