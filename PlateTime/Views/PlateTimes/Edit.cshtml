@@ -1,0 +1,64 @@
+﻿@model PlateTimeApp.Models.PlateTime
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h3 class="text-primary text-center font-weight-bold">PlateTime</h3>
+<h4 class="text-center"><i class="fas fa-utensils"></i></h4>
+<h4 class="text-center text-primary">Edit</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            @if (ViewBag.isRestaurant == null)
+            {
+                <div class="form-group">
+                    <label asp-for="RestaurantId" class="control-label"></label>
+                    <select asp-for="RestaurantId" class="form-control" asp-items="ViewBag.RestaurantId"></select>
+                    <span asp-validation-for="RestaurantId" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="RestaurantId" />
+            }
+                <div class="form-group">
+                    <label asp-for="Time" class="control-label"></label>
+                    <input asp-for="Time" class="form-control" />
+                    <span asp-validation-for="Time" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaxMembers" class="control-label"></label>
+                    <input asp-for="MaxMembers" class="form-control" />
+                    <span asp-validation-for="MaxMembers" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Isopen" class="control-label"></label>
+                    <select asp-for="Isopen" class="form-control" asp-items="ViewBag.TrueFalse"></select>
+                    <span asp-validation-for="Isopen" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="btn-group  btn-group-justified">
+                        <div class="btn-group">
+                            <input type="submit" value="Save" class="btn btn-warning" />
+                        </div>
+                        <div class="btn-group">
+                            <a asp-action="Index" value="Cancel" class="btn btn-info">Back to List </a>
+                        </div>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+
+@*<div>
+    <a asp-action="Index">Back to List</a>
+</div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<PlateTimeApp.Models.PlateTime>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="text-center text-primary font-weight-bold">PlateTime</h3>
+
+<p>
+    <a asp-action="Create" class="btn btn-warning btn-block btn-lg">Create New PlateTime</a>
+</p>
+<table class="table text-center">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Restaurant)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.MaxMembers)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Isopen)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.RestaurantGoer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Restaurant.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxMembers)
+            </td>
+            <td>
+                @if (item.Isopen == true)
+                {
+                    <span class="font-weight-bold">Open</span>
+                }
+                else
+                {
+                    <span>Closed</span>
+                }
+            </td>
+            @if (item.RestaurantGoerId == null)
+            {
+                <td>
+                    Restaurant: @Html.DisplayFor(modelItem => item.Restaurant.Name)
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.RestaurantGoer.Name)
+                </td>
+            }
+            @if (ViewBag.currentResGoer == item.RestaurantGoerId || (ViewBag.currentRes == item.RestaurantId && item.RestaurantGoerId == null))
+            {
+                <td>
+                    <a asp-action="Details" class="font-weight-bold" asp-route-id="@item.Id">Details</a><br />
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><br />
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            }else
+            {
+                <td>
+                    <a asp-action="Details" class="font-weight-bold" asp-route-id="@item.Id">Details</a>
+                </td>
+            }
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "AccessApi";
+}
+
+<h3 class="text-center text-primary font-weight-bold">PlateTime</h3>
+<h4 class="text-center"><i class="fas fa-utensils"></i></h4>
+<h4 class="text-center text-primary">Access Our API</h4>
+
+<p>Please use the following scripts as a template to access our Api<p>
+
+    <code style="color:green">
+        const app = document.getElementById('root');<br><br>
+
+        const container = document.createElement('div');<br><br>
+
+        app.appendChild(container);<br><br>
+
+        var newsDate = "/2019-03-11";<br><br>
+        var retrieveMethod = "/getbyid";<br><br>
+        retrieveMethod = "/getbydate";<br><br>
+
+        var request = new XMLHttpRequest();<br><br>
+        request.open('GET', 'https://platetimeapp.azurewebsites.net/api/newsfeed' + retrieveMethod + newsDate, true);<br><br>
+        request.onload = function () {<br><br>
+
+        &nbsp;&nbsp;// Begin accessing JSON data here<br><br>
+        &nbsp;&nbsp;var data = JSON.parse(this.response);<br><br>
+
+        &nbsp;&nbsp;if (request.status >= 200 && request.status < 400) {<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;data.forEach(news => {<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const card = document.createElement('div');<br><br>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const h2 = document.createElement('h2');<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h2.textContent = news.title;<br><br>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const h3 = document.createElement('h3');<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h3.textContent = news.newsDate;<br><br>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const p = document.createElement('p');<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p.textContent = news.description;<br><br>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;news.description = news.description.substring(0, 300);<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p.textContent = `${news.description}...`;<br><br>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;container.appendChild(card);<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;card.appendChild(h2);<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;card.appendChild(h3);<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;card.appendChild(p);<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;});<br><br>
+        &nbsp;&nbsp;} else {<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;const errorMessage = document.createElement('marquee');<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;errorMessage.textContent = `Sorry, it's not working!`;<br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;app.appendChild(errorMessage);<br><br>
+        &nbsp;&nbsp;}<br><br>
+        }<br><br>
+
+        request.send();
+    </code>
+
+<br /> <br />
+
+<div class="btn-group  btn-group-justified">
+    <div class="btn-group">
+        <a asp-action="ApiGuide" class="btn btn-info">Back to API Guide</a>
+    </div>
+</div>

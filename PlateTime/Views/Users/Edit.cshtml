@@ -1,0 +1,161 @@
+﻿@model PlateTimeApp.ViewModel.UserProfileVM
+@*@{
+        ViewData["Title"] = "Edit";
+    }*@
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h2></h2>
+
+        <h3 class="text-center text-primary">User Profile</h3>
+        <hr />
+        <form asp-action="Edit">
+            @if (ViewBag.count == 1)
+            {
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" value="@(ViewBag.RestaurantGoerName)" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                @*<div class="form-group">
+                <label asp-for="price_category" class="control-label"></label>
+                @Html.DropDownListFor(model => model.price_category, new SelectList(ViewBag.Price, "Value", "Text",@ViewData["PriceCategory"].ToString()),
+                                                                      "Select Price Category",
+                                                                      new { @id = "idDD", @class = "form-control"})
+                <span asp-validation-for="price_category" class="text-danger"></span>
+            </div>*@
+
+                <div class="form-group">
+                    <label asp-for="RestaurantName" class="control-label"></label>
+                    @*<select asp-for="RestaurantId" asp-items=""></select>*@
+
+                    @Html.DropDownList("RestaurantName",
+                    new SelectList(ViewBag.ReataurantIdSelectList, "Value", "Text", @ViewData["RestaurantName"]),
+                    "Select Restaurant ",
+                    new { @id = "idDD", @class = "form-control" })
+                    <span asp-validation-for="RestaurantName" class="text-danger"></span>
+
+                </div>
+
+                @*<div class="form-group">
+                <label asp-for="foodCategoryName" class="control-label"></label>
+
+                @Html.DropDownList("FoodCategoryName",
+                                                     new SelectList(ViewBag.IdSelectList, "Value", "Text", @ViewData["foodCategory"]),
+                                                     "Select Food category",
+                                                     new { @id = "idDD", @class = "form-control" })
+
+
+
+                <span asp-validation-for="foodCategoryName" class="text-danger"></span>
+            </div>*@
+
+                <div class="form-group">
+                    <label class="control-label">Price Category</label>
+                    @Html.DropDownList("PriceCategoryString", Model.PriceCategoryList, "")
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Food Categories</label>
+                    <br />
+                    @Html.EditorFor(x => x.FoodCategoryCheckboxes)
+                </div>
+
+                <div class="form-group">
+                    <div class="btn-group  btn-group-justified">
+                        <div class="btn-group">
+                            <input type="submit" value="Save" class="btn btn-warning" />
+                        </div>
+                        <div class="btn-group">
+                            <a asp-area="" asp-controller="Home" asp-action="Index" value="Cancel" class="btn btn-warning">Cancel </a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                @*<div class="form-group">
+
+                    <label asp-for="price_category" class="control-label"></label>
+                    @Html.DropDownListFor(model => model.price_category, new SelectList(ViewBag.Price, "Value", "Text"),
+                  "Select Price Range ",
+                 new { @id = "idDD", @class = "form-control" })
+
+                    <span asp-validation-for="price_category" class="text-danger"></span>
+                </div>*@
+
+                <div class="form-group">
+                    <label asp-for="RestaurantName" class="control-label"></label>
+                    @*<select asp-for="RestaurantId" asp-items=""></select>*@
+
+                    @Html.DropDownList("RestaurantName",
+                    new SelectList(ViewBag.ReataurantIdSelectList, "Value", "Text"),
+                    "Select Restaurant ",
+                    new { @id = "idDD", @class = "form-control" })
+                    <span asp-validation-for="RestaurantName" class="text-danger"></span>
+
+                </div>
+
+                @*<div class="form-group">
+                    <label asp-for="foodCategoryName" class="control-label"></label>
+
+                    @Html.DropDownList("FoodCategoryName",
+                    new SelectList(ViewBag.IdSelectList, "Value", "Text"),
+                    "Select FoodCategory",
+                    new { @id = "idDD", @class = "form-control" })
+
+
+
+                    <span asp-validation-for="foodCategoryName" class="text-danger"></span>
+                </div>*@
+
+                <div class="form-group">
+                    <label class="control-label">Price Category</label>
+
+                    @Html.DropDownList("PriceCategoryString", Model.PriceCategoryList, "")
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Food Categories</label>
+                    <br />
+                    @Html.EditorFor(x => x.FoodCategoryCheckboxes)
+                </div>
+
+                <div class="form-group">
+                    <div class="btn-group  btn-group-justified">
+                        <div class="btn-group">
+                            <input type="submit" value="Save" class="btn btn-warning" />
+                        </div>
+                        <div class="btn-group">
+                            <a asp-area="" asp-controller="Home" asp-action="Index" value="Cancel" class="btn btn-warning">Cancel </a>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </form>
+        @*<a asp-action="Index">Back to List</a>*@
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }
+
+
+        </div>
+    </div>
+
+    <div>
+    </div>
+</div>

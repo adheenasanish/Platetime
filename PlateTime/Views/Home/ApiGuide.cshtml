@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "ApiGuide";
+}
+
+<h3 class="text-center text-primary font-weight-bold">PlateTime</h3>
+<h4 class="text-center"><i class="fas fa-utensils"></i></h4>
+<h4 class="text-center text-primary">API Guide</h4>
+
+<p><strong>Base URL</strong></p>
+
+<p>https://platetimeapp.azurewebsites.net</p>
+
+<p><strong>Getting Started</strong></p>
+<p>All news requests should be made to the newsfeed API URL.</p>
+<code style="color:green">https://platetimeapp.azurewebsites.net/api/newsfeed</code>
+<br><br>
+<p>News could be retrieve by news date or by news id. To get by news date, append "/getbydate" to the URL, and then append the date in yyyy-mm-dd format.  Here's how to get the resource by date as an example.</p>
+<code style="color:green">https://platetimeapp.azurewebsites.net/api/newsfeed/getbydate/2019-03-13 </code>
+<br><br>
+<p>Here's how to get the resource by id as an example</p>
+<code style="color:green">https://platetimeapp.azurewebsites.net/api/newsfeed/getbyid/1</code>
+<br><br>
+<p>The response will be like the following.</p>
+
+<code>
+    {
+    "id": 1,
+    "title": "Papa John's partners with DoorDash",
+    "description": "The third-party deal will supplement the pizza chian's in-house delivery.",
+    "newsDate": "2019-03-13T00:00:00",
+    "restaurantName": "Papa John's",
+    "cuisineType": "Pizza"
+    },
+</code>
+<br><br>
+<code>
+    {
+    "id": 2,
+    "title": "Menu Tracker: New items from McDonald's, Fuddruckers, Pie Five",
+    "description": "1000 Degrees Pizza, The Coffee Bean & Tea Leaf, Dos Toros, Fogo de Chão, Grimaldi’s Pizzeria, Growler USA, Jamba Juice, Mimi’s, Num Pang Kitchen, Sizzler and TooJay’s Deli also added new pizzas, seafood dishes and more.",
+    "newsDate": "2019-03-13T00:00:00",
+    "restaurantName": null,
+    "cuisineType": "Fastfood"
+    }
+</code>
+
+<br><br>
+<p><strong>Use Case</strong></p>
+
+<p>There are numerouse ways to access PlateTime Data API. The following link is a script example to access using JavaScript.</p>
+
+<div>
+    <a asp-action="AccessApi" class="btn btn-warning btn-block btn-lg">Premade Scripts</a>
+</div>
+<br>
+<p><strong>Support</strong></p>
+<p>Users can raise an issue or ask for help at the main repo: </p>
+<a>https://github.com/mendelbrot/PlateTime</a>

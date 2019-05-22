@@ -1,0 +1,43 @@
+﻿@model PlateTimeApp.ViewModel.RestaurantProfileVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Restauraunt Profile Page</h1>
+
+<div id="profile">
+
+    <h2>Profile</h2>
+
+    <table>
+        <tr>
+            <td><b>Name:</b></td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td><b>URL:</b></td>
+            <td>@Model.Url</td>
+        </tr>
+        <tr>
+            <td><b>Street Adress:</b></td>
+            <td>@Model.StreetAddress</td>
+        </tr>
+        <tr>
+            <td><b>City:</b></td>
+            <td>@Model.City</td>
+        </tr>
+        <tr>
+            <td><b>Postal Code:</b></td>
+            <td>@Model.PostalCode</td>
+        </tr>
+    </table>
+
+    <a asp-action="Edit" asp-route-id="@Model.UserId">Edit Profile</a>
+</div>
+
+<div id="platetimes">
+
+    <h2>Platetimes</h2>
+
+</div>

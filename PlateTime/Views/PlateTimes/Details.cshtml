@@ -1,0 +1,122 @@
+﻿@model PlateTimeApp.Models.PlateTime
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h3 class="text-center text-primary font-weight-bold">PlateTime</h3>
+<h4 class="text-center"><i class="fas fa-utensils"></i></h4>
+<h4 class="text-center text-primary">Details</h4>
+
+<div>
+    @if (!ViewBag.plateTimeFull && !ViewBag.plateTimeClosed)
+    {
+        @if (ViewBag.currentResGoer != Model.RestaurantGoerId && ViewBag.currentRes == 0)
+        {
+            @if (ViewBag.isGoing)
+            {
+                <a asp-action="CancelJoinPlateTime" asp-route-plateTimeId="@Model.Id" asp-route-resGoerId="@ViewBag.currentResGoer" class="btn btn-warning btn-lg btn-block">Cancel RSVP</a>
+            }
+            else if (!ViewBag.isGoing)
+            {
+                <a asp-action="JoinPlateTime" asp-route-plateTimeId="@Model.Id" asp-route-resGoerId="@ViewBag.currentResGoer" class="btn btn-warning btn-lg btn-block">RSVP</a>
+            }
+        }
+    }
+    else
+    {
+        @if (ViewBag.plateTimeClosed)
+        {
+            <div class="alert alert-danger text-center" role="alert">
+                This PlateTime is Closed.
+            </div>
+        }else if (ViewBag.plateTimeFull)
+        {
+            @if (ViewBag.isGoing)
+            {
+                <a asp-action="CancelJoinPlateTime" asp-route-plateTimeId="@Model.Id" asp-route-resGoerId="@ViewBag.currentResGoer" class="btn btn-warning btn-lg btn-block">Cancel RSVP</a>
+            }
+            <br />
+            <div class="alert alert-warning text-center" role="alert">
+                This PlateTime is Full.
+            </div>
+        }
+
+    }
+
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Restaurant)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Restaurant.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxMembers)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaxMembers)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RestaurantGoer)
+        </dt>
+        @if (Model.RestaurantGoerId == null)
+        {
+            <dd>
+                Restaurant: @Html.DisplayFor(model => model.Restaurant.Name)
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.RestaurantGoer.Name)
+            </dd>
+        }
+
+    </dl>
+</div>
+
+<hr />
+
+<h4 class="font-weight-bold text-center">Members who have joined this PlateTime:</h4>
+<table class="table">
+    <tbody class="text-center">
+        @foreach (var resGoer in ViewBag.resGoersList)
+        {
+            <tr>
+                <td>
+                    @resGoer.Name
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (ViewBag.currentResGoer == Model.RestaurantGoerId || (ViewBag.currentRes == Model.RestaurantId && Model.RestaurantGoerId == null))
+{
+
+    <div class="btn-group  btn-group-justified">
+        <div class="btn-group">
+            <a asp-action="Edit" class="btn btn-warning" asp-route-id="@Model.Id">Edit</a>
+        </div>
+        <div class="btn-group">
+            <a asp-action="Index" class="btn btn-info">Back to List </a>
+        </div>
+    </div>
+
+}else
+{
+    <div class="btn-group  btn-group-justified">
+        <div class="btn-group">
+            <a asp-action="Index" class="btn btn-info">Back to List </a>
+        </div>
+    </div>
+}

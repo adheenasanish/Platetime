@@ -1,0 +1,64 @@
+﻿@model PlateTimeApp.Models.PlateTime
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3 class="text-center text-primary font-weight-bold">PlateTime</h3>
+<div class="alert alert-danger text-center" role="alert">
+    Are you sure you want to delete this?
+</div>
+<div>
+    @*<h4 class="text-primary text-center">Delete</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxMembers)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaxMembers)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Isopen)
+        </dt>
+        <dd>
+            @Html.DisplayTextFor(model => model.Isopen)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.AllCommitted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AllCommitted)
+        </dd>*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Restaurant)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Restaurant.Name)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.RestaurantGoer)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RestaurantGoer.Name)
+        </dd>*@
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <div class="btn-group  btn-group-justified">
+            <div class="btn-group">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+            <div class="btn-group">
+                <a asp-action="Index" class="btn btn-info">Back to List </a>
+            </div>
+        </div>
+    </form>
+</div>

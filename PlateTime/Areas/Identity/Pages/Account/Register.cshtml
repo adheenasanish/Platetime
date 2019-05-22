@@ -1,0 +1,95 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1 style="display: flex; justify-content: center;">
+    <img src="~/images/PlateTime-Logo.svg" alt="PlateTime Logo" style="width:120px; height:120px;">
+</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h4>@ViewData["Title"]</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            @Html.RadioButtonFor(m => m.Input.Usertype, "Member")
+            <label for="Member">Member</label>
+            @Html.RadioButtonFor(m => m.Input.Usertype, "Manager")
+            <label for="Manager">Restraunt</label>
+
+            <div id="ReCaptchContainer"></div>
+            <br /><label id="lblMessage"></label><br />
+
+
+            <button type="submit" class="btn btn-default">Register</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<!--Load reCaptcha API-->
+<script src="https://www.google.com/recaptcha/api.js?onload=renderRecaptcha&render=explicit"
+        async defer>
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<script type="text/javascript">
+    // Style and draw reCAPTCHA.
+    var renderRecaptcha = function () {
+        grecaptcha.render('ReCaptchContainer', {
+            'sitekey':  '@ViewData["SiteKey"]',
+            'callback': reCaptchaCallback,
+            theme:      'light',    //light or dark
+            type:       'image',    // image or audio
+            size:       'normal'    //normal or compact
+        });
+    };
+
+    var reCaptchaCallback = function (response) {
+        //alert("hi");
+        // If reCAPTCHA is successful display it.
+        if (response !== '') {
+            jQuery('#lblMessage').css('color', 'green').html('Success');
+            $(':input[type="submit"]').prop('disabled', false);
+        }
+    };
+
+    // Check reCAPTCHA validation.
+    jQuery('button[type="button"]').click(function (e) {
+        var message = 'Please checck the checkbox';
+        if (typeof (grecaptcha) != 'undefined') {
+            var response = grecaptcha.getResponse();
+            (response.length === 0) ? (message = 'Captcha verification failed')
+                                    : (message = 'Success!');
+        }
+        jQuery('#lblMessage').html(message);
+        jQuery('#lblMessage').css('color',
+                              (message.toLowerCase() == 'success!') ? "green" : "red");
+    });
+
+    // Disable button when form loads.
+    $(document).ready(function () {
+        $(':input[type="submit"]').prop('disabled', true);
+    });
+
+</script>
