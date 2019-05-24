@@ -7,8 +7,3 @@ This is a social app for matching people with similar interests, availabilities 
 
 [Setup Instructions](https://docs.google.com/document/d/1t3EfPeSrkaeJb5CGRGfOlBG60T1axzs3O26AYJbJQzE/edit?usp=sharing)
 
-# Test Users
-* admin@home.com (no restaurant or restaurantgoer id)
-* restaurant@home.com (has restaurant id)
-* restaurantgoer@home.com (has restaurantgoer id)
-* P@ssw0rd!
