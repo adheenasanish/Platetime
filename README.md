@@ -1,7 +1,7 @@
 # PlateTime
 This is a social app for matching people with similar interests, availabilities and food preferences to come out for a meal.
 
-[Live Prototype](https://platetimeapp.azurewebsites.net)
+[Live Prototype](https://platetimeapps.azurewebsites.net)
 
 [One Stop Shop](https://docs.google.com/document/d/1InLH27gMqN3MDaEVs1WAqufHR9UpA0lpn0xbQiREBSk/edit#heading=h.3kba8acv32u1)
 
